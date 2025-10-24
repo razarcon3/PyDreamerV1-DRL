@@ -40,8 +40,9 @@ Dreamer stands at the forefront of model-based reinforcement learning by introdu
 
 3. **Run the Training**: Kickstart the training process with a simple command:
    ```
-   python main.py --config <Path to config file>
+   python main.py --config <Path to config file under configs folder>
    ```
+   Example: --config dm_control/Cart-Pole.yml
 
 4. **Visualize Results**: Utilize TensorBoard to observe training progress and visualize the agent's performance in real-time. Wandb is also supported, simply set enable to True and replace with your account information in config files.
    ```

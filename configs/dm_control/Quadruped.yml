@@ -7,6 +7,7 @@ env:
     task: walk
     discrete: False
     new_obs_size: [64, 64]
+    action_repeat: 1
     norm_obs: True
 
 tensorboard:

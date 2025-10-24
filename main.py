@@ -10,7 +10,8 @@ Description:
 
 
 import os
-os.environ["MUJOCO_GL"] = "egl"
+# os.environ["MUJOCO_GL"] = "egl" # use egl for linux
+os.environ["MUJOCO_GL"] = "glfw" # use glfw for windows
 
 import gymnasium as gym
 import numpy as np
