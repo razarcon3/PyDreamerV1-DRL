@@ -21,7 +21,7 @@ Key Folders:
 - ./results: contains episode return graphs and demo videos for each task
 - ./raw_logs: contains raw logs for our experiments
 - ./notebooks: contains notebooks for running experiments
-- ./QuadcopterTask: files related to our custom Quadcopter task
+- ./isaaclab_quadcopter: files related to our custom Quadcopter task
 
 The rest of the folders in this repo contain the main implementation for DreamerV1. 
 
