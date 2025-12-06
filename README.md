@@ -19,6 +19,7 @@ This repository offers a comprehensive implementation of the Dreamer algorithm, 
 
 Key Folders:
 - ./results: contains episode return graphs and demo videos for each task
+- ./raw_logs: contains raw logs for our experiments
 - ./notebooks: contains notebooks for running experiments
 - ./QuadcopterTask: files related to our custom Quadcopter task
 
