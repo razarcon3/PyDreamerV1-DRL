@@ -14,6 +14,16 @@
 
 This repository offers a comprehensive implementation of the Dreamer algorithm, as presented in the groundbreaking work by Hafner et al., "Dream to Control: Learning Behaviors by Latent Imagination." Our implementation is dedicated to faithfully reproducing the innovative approach of learning and planning within a learned latent space, enabling agents to efficiently master complex behaviors through imagination alone.
 
+
+Key Folders:
+- ./results: contains episode return graphs and demo videos for each task
+- ./notebooks: contains notebooks for running experiments
+- ./QuadcopterTask: files related to our custom Quadcopter task
+
+The rest of the folders in this repo contain the main implementation for DreamerV1. 
+
+**We furthermore made some adjustments to a PyTorch implementation of DreamerV3. Our fork can be found here: https://github.com/PV5667/dreamerv3-torch-DRL, and code to run training with this repo can be found in ./notebooks/dreamerv3-miniworld**.
+
 ## Why Dreamer?
 
 Dreamer stands at the forefront of model-based reinforcement learning by introducing an efficient method for learning behaviors directly from high-dimensional sensory inputs. It leverages a latent dynamics model to 'imagine' future states and rewards, enabling it to plan and execute actions that maximize long-term rewards purely from simulated experiences. This approach significantly improves sample efficiency over traditional model-free methods and opens new avenues for learning complex and nuanced behaviors in simulated environments. However, the official code was unfortunately regarded as complex and difficult to understand, and there are only a handful of Dreamer reimplementation that was able to reproduce the results.
