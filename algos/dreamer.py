@@ -285,8 +285,17 @@ class Dreamer:
             torch.mean(torch.distributions.kl.kl_divergence(posteriors_dist, priors_dist)),
             torch.tensor(self.config.main.free_nats).to(self.device)
         )
+
         
-        total_loss = self.config.main.kl_divergence_scale * kl_loss - reconstruct_loss - rewards_loss + continue_loss
+        cs = getattr(self.config.main, "cls", 0.0)
+        if type(cs) == float and cs > 0:
+            cos = torch.nn.functional.cosine_similarity(posteriors, priors, dim=-1)
+            cl = (1 - cos).mean()
+        else:
+            cs = 0
+            cl = torch.zeros((), device=self.device)
+        
+        total_loss = self.config.main.kl_divergence_scale * kl_loss - reconstruct_loss - rewards_loss + continue_loss + cs * cl
         
         self.dyna_optimizer.zero_grad()
         total_loss.backward()
@@ -303,6 +312,7 @@ class Dreamer:
             'Dynamic_model/Reconstruction': reconstruct_loss.item(),
             'Dynamic_model/Reward': rewards_loss.item(),
             'Dynamic_model/Continue': continue_loss.item(),
+            'Dynamic_model/Contrastive': cl.item(),
             'Dynamic_model/Total': total_loss.item()
         }
         

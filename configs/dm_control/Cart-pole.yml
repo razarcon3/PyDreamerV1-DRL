@@ -7,7 +7,7 @@ env:
     task: balance
     discrete: False
     new_obs_size: [64, 64]
-    action_repeat: 1
+    action_repeat: 2
     norm_obs: True
 
 tensorboard:
@@ -18,7 +18,7 @@ tensorboard:
 wandb:
     enable: True
     project: "dreamer"
-    entity: "phdminh01"
+    entity: "mlg-team"
     log_frequency: 1
 
 video_recording:
@@ -28,7 +28,7 @@ video_recording:
 main:
     continue_loss: False
     continue_scale_factor: 10
-    total_iter: 2000
+    total_iter: 4000
     save_freq: 20
     collect_iter: 100
     data_interact_ep: 1
@@ -44,6 +44,7 @@ main:
     free_nats : 3
     discount : 0.99
     lambda_ : 0.95
+    cls: 0.1
     
     actor_lr : 8.0e-5
     critic_lr : 8.0e-5

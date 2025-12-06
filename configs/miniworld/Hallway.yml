@@ -1,14 +1,15 @@
 device: "cuda"
-experiment_name: Quadruped
+experiment_name: MiniWorld-Hallway
 seed: 0
 
 env:
-    env_id: quadruped
-    task: walk
-    discrete: False
+    env_id: MiniWorld-Hallway-v0
+    channel_first: True
+    discrete: True
+    resize_obs: True
     new_obs_size: [64, 64]
-    action_repeat: 2
     norm_obs: True
+    action_repeat: 2
 
 tensorboard:
     enable: False
@@ -23,10 +24,11 @@ wandb:
 
 video_recording:
     enable: True
-    record_frequency: 50  #episodes
+    record_frequency: 100  #episodes
+    save_path: "./runs/"
 
 main:
-    continue_loss: False
+    continue_loss: True
     continue_scale_factor: 10
     total_iter: 4000
     save_freq: 20
@@ -34,26 +36,27 @@ main:
     data_interact_ep: 1
     # data_init_ep: 1
     data_init_ep: 5
-    horizon: 15
+    horizon: 10
     batch_size: 50
     seq_len: 50
     eval_eps: 3
     eval_freq: 5
 
-    kl_divergence_scale : 1
+    kl_divergence_scale : 0.1
     free_nats : 3
     discount : 0.99
     lambda_ : 0.95
+    cls: 0.1
     
     actor_lr : 8.0e-5
     critic_lr : 8.0e-5
     dyna_model_lr : 6.0e-4
     grad_norm_type : 2
     clip_grad : 100
-
-    hidden_units: 300
-    deterministic_size : 200
-    stochastic_size : 30
+    
+    hidden_units: 400
+    deterministic_size : 600
+    stochastic_size : 600
     embedded_obs_size : 1024
     buffer_capacity : 500000
 

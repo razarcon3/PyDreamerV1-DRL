@@ -126,13 +126,14 @@ class DMCtoGymWrapper(gym.Env):
         self.current_step = 0
         self.total_reward = 0
         self.recorder = None
+        self.domain_name = domain_name
 
         # Define action and observation space based on the DMC environment
         action_spec = self.env.action_spec()
         self.action_space = gym.spaces.Box(low=action_spec.minimum, high=action_spec.maximum, dtype=np.float32)
         
         # Initialize the pixels wrapper for observation space
-        self.env = pixels.Wrapper(self.env, pixels_only=True)
+        self.env = pixels.Wrapper(self.env, pixels_only=False)
         self.resize = resize  # Assuming RGB images
         self.observation_space = gym.spaces.Box(low=-0.5, high=+0.5, shape=(3, *resize), dtype=np.float32)
 
@@ -149,6 +150,15 @@ class DMCtoGymWrapper(gym.Env):
         self.current_step += 1
         
         termination = time_step.last()
+
+        if self.domain_name == "cartpole":
+            cos = time_step.observation['position'][1]
+            sin = time_step.observation['position'][2]
+            
+            theta = np.arctan2(sin, cos)
+            if abs(theta) > np.deg2rad(24):
+                termination = True
+            
         truncation = (self.current_step == self.max_episode_steps)
         info = {}
         if termination or truncation:

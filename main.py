@@ -10,8 +10,8 @@ Description:
 
 
 import os
-# os.environ["MUJOCO_GL"] = "egl" # use egl for linux
-os.environ["MUJOCO_GL"] = "glfw" # use glfw for windows
+os.environ["MUJOCO_GL"] = "egl" # use egl for linux
+# os.environ["MUJOCO_GL"] = "glfw" # use glfw for windows
 
 import gymnasium as gym
 import numpy as np
@@ -58,12 +58,20 @@ if config.wandb.enable:
         project=config.wandb.project,
         entity=config.wandb.entity,
         sync_tensorboard=True,
+        config=config,
         name=experiment_name,
         monitor_gym=True,
         save_code=True,
     )
 
 if 'ALE' in config.env.env_id:
+    env = gym.make(env_id, render_mode='rgb_array')
+    env = AtariPreprocess(env, config.env.new_obs_size, 
+                          config.video_recording.enable, 
+                          record_path=config.tensorboard.log_dir + local_path + '/videos/', 
+                          record_freq=config.video_recording.record_frequency)
+elif 'MiniWorld' in config.env.env_id:
+    import miniworld
     env = gym.make(env_id, render_mode='rgb_array')
     env = AtariPreprocess(env, config.env.new_obs_size, 
                           config.video_recording.enable, 
