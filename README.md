@@ -22,7 +22,7 @@ Key Folders:
 
 The rest of the folders in this repo contain the main implementation for DreamerV1. 
 
-**We furthermore made some adjustments to a PyTorch implementation of DreamerV3. Our fork can be found here: https://github.com/PV5667/dreamerv3-torch-DRL, and code to run training with this repo can be found in ./notebooks/dreamerv3-miniworld**.
+**We furthermore made some adjustments to a PyTorch implementation of DreamerV3 to run on the Mini World environments. Our fork can be found here: https://github.com/PV5667/dreamerv3-torch-DRL, and code to run training with this repo can be found in ./notebooks/dreamerv3-miniworld**.
 
 ## Why Dreamer?
 
