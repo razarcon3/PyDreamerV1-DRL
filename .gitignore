@@ -33,3 +33,4 @@ Miniworld
 *.out
 *.bash
 .envrc
+!raw_logs/*
