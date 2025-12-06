@@ -1,3 +1,5 @@
+Original Repo: https://github.com/minhphd/PyDreamerV1
+
 # PyDreamerV1: Clean pytorch implementation of Hafner et al Dreamer
 <div align="center">
   <img src="./gif/boxing.gif" alt="Actual run in " width="200px" height="200px"/>
