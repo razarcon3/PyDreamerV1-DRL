@@ -1,0 +1,82 @@
++ nvidia-smi
+Fri Dec  5 02:21:03 2025       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 525.125.06   Driver Version: 525.125.06   CUDA Version: 12.0     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  NVIDIA A40          On   | 00000000:C1:00.0 Off |                    0 |
+|  0%   24C    P8    18W / 300W |      0MiB / 46068MiB |      0%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
++ export NCCL_DEBUG=INFO
++ NCCL_DEBUG=INFO
++ export PYTHONFAULTHANDLER=1
++ PYTHONFAULTHANDLER=1
++ export PYOPENGL_PLATFORM=egl
++ PYOPENGL_PLATFORM=egl
++ export DISPLAY=:99.0
++ DISPLAY=:99.0
++ srun python main.py --config dm_control/Cart-pole.yml
++ Xvfb :99 -screen 0 1024x768x24
+(EE) 
+Fatal server error:
+(EE) Server is already active for display 99
+	If this server is no longer running, remove /tmp/.X99-lock
+	and start again.
+(EE) 
+wandb: Currently logged in as: razarcon3 (mlg-team) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+/coc/testnvme/razarcon3/miniforge3/envs/dreamer/lib/python3.11/site-packages/wandb/analytics/sentry.py:279: DeprecationWarning: The `Scope.user` setter is deprecated in favor of `Scope.set_user()`.
+  self.scope.user = {"email": email}
+wandb: setting up run cvwjgfvp
+/coc/testnvme/razarcon3/miniforge3/envs/dreamer/lib/python3.11/site-packages/wandb/analytics/sentry.py:279: DeprecationWarning: The `Scope.user` setter is deprecated in favor of `Scope.set_user()`.
+  self.scope.user = {"email": email}
+wandb: Tracking run with wandb version 0.23.1
+wandb: Run data is saved locally in /coc/testnvme/razarcon3/PyDreamerV1-DRL/wandb/run-20251205_022107-cvwjgfvp
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run cartpole_20251205-022107
+wandb: ⭐️ View project at https://wandb.ai/mlg-team/dreamer
+wandb: 🚀 View run at https://wandb.ai/mlg-team/dreamer/runs/cvwjgfvp
+OpenCV: FFMPEG: tag 0x30387076/'vp80' is not supported with codec id 139 and format 'webm / WebM'
+Configuration loaded successfully.
+
+-----------initialized memory----------              
+
+obs_buffer_shape: (500000, 3, 64, 64)
+actions_buffer_shape: (500000, 1)
+rewards_buffer_shape: (500000, 1)
+dones_buffer_shape: (500000, 1)
+
+----------------------------------------
+              
+Traceback (most recent call last):
+  File "/coc/testnvme/razarcon3/PyDreamerV1-DRL/main.py", line 97, in <module>
+    agent.train()
+  File "/coc/testnvme/razarcon3/PyDreamerV1-DRL/algos/dreamer.py", line 129, in train
+    next_obs, reward, termination, truncation, info = self.env.step(action)
+                                                      ^^^^^^^^^^^^^^^^^^^^^
+  File "/coc/testnvme/razarcon3/PyDreamerV1-DRL/utils/wrappers.py", line 100, in step
+    return self._env.step(original)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/coc/testnvme/razarcon3/PyDreamerV1-DRL/utils/wrappers.py", line 34, in step
+    obs, reward, termination, truncation, info = self.env.step(action)
+                                                 ^^^^^^^^^^^^^^^^^^^^^
+  File "/coc/testnvme/razarcon3/PyDreamerV1-DRL/utils/wrappers.py", line 153, in step
+    if self.domain_name == "cartpole":
+       ^^^^^^^^^^^^^^^^
+AttributeError: 'DMCtoGymWrapper' object has no attribute 'domain_name'
+[1;34mwandb[0m: 
+[1;34mwandb[0m: 🚀 View run [33mcartpole_20251205-022107[0m at: [34mhttps://wandb.ai/mlg-team/dreamer/runs/cvwjgfvp[0m
+[1;34mwandb[0m: Find logs at: [1;35mwandb/run-20251205_022107-cvwjgfvp/logs[0m
+srun: error: major: task 0: Exited with exit code 1
+srun: Terminating StepId=2112485.0

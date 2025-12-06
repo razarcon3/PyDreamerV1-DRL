@@ -34,3 +34,4 @@ Miniworld
 *.bash
 .envrc
 !raw_logs/*
+!raw_logs/dreamerv1/*.out

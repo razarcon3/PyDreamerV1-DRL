@@ -1,0 +1,69 @@
++ nvidia-smi
+Fri Dec  5 01:29:16 2025       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 525.147.05   Driver Version: 525.147.05   CUDA Version: 12.0     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  NVIDIA A40          On   | 00000000:61:00.0 Off |                    0 |
+|  0%   25C    P8    20W / 300W |      0MiB / 46068MiB |      0%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
++ export NCCL_DEBUG=INFO
++ NCCL_DEBUG=INFO
++ export PYTHONFAULTHANDLER=1
++ PYTHONFAULTHANDLER=1
++ export PYOPENGL_PLATFORM=egl
++ PYOPENGL_PLATFORM=egl
++ export DISPLAY=:99.0
++ DISPLAY=:99.0
++ srun python main.py --config dm_control/Cart-pole.yml
++ Xvfb :99 -screen 0 1024x768x24
+(EE) 
+Fatal server error:
+(EE) Server is already active for display 99
+	If this server is no longer running, remove /tmp/.X99-lock
+	and start again.
+(EE) 
+OpenCV: FFMPEG: tag 0x30387076/'vp80' is not supported with codec id 139 and format 'webm / WebM'
+Configuration loaded successfully.
+
+-----------initialized memory----------              
+
+obs_buffer_shape: (500000, 3, 64, 64)
+actions_buffer_shape: (500000, 1)
+rewards_buffer_shape: (500000, 1)
+dones_buffer_shape: (500000, 1)
+
+----------------------------------------
+              
+1
+2
+3
+4
+5
+  0%|          | 0/4000 [00:00<?, ?it/s]
+  0%|          | 0/100 [00:00<?, ?it/s][A  0%|          | 0/100 [00:00<?, ?it/s]
+  0%|          | 0/4000 [00:16<?, ?it/s]
+Traceback (most recent call last):
+  File "/coc/testnvme/razarcon3/PyDreamerV1-DRL/main.py", line 109, in <module>
+    agent.train()
+  File "/coc/testnvme/razarcon3/PyDreamerV1-DRL/algos/dreamer.py", line 169, in train
+    post, deter = self.dynamic_learning(batch)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/coc/testnvme/razarcon3/PyDreamerV1-DRL/algos/dreamer.py", line 290, in dynamic_learning
+    if cs > 0:
+       ^^^^^^
+TypeError: '>' not supported between instances of 'Dict' and 'int'
+srun: error: chappie: task 0: Exited with exit code 1
+srun: Terminating StepId=2112474.0
